@@ -1,0 +1,35 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:h="http://xmlns.jcp.org/jsf/html"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+              xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+              xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <cc:interface>
+        <cc:attribute name="header" default="HEADER_SEARCH_CRITERIA" />
+        <cc:attribute name="filterAction" method-signature="java.lang.String filter()" />
+    </cc:interface>
+
+    <cc:implementation>
+        <div id="#{cc.clientId}">
+            <p:panel header="#{cc.attrs.header}" toggleable="true">
+                <cc:insertChildren />
+    
+                <f:facet name="footer">
+                    <p:commandButton id="search_btn"
+                                     value="BUTTON_FILTER}" 
+                                     action="#{cc.attrs.filterAction}"
+                                     icon="ui-icon-search"/>
+
+                   <p:commandButton value="BUTTON_CLEAR_FILTER"
+                                    action="#{cc.attrs.filterAction}" 
+                                    process="@this" 
+                                    immediate="true">
+                    </p:commandButton>
+                </f:facet>
+    
+                <p:defaultCommand target="search_btn" />
+            </p:panel>
+        </div>
+    </cc:implementation>
+</ui:component>
